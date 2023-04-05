@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>task</title>
+    <style>
+        #list1 .form-control {
+            border-color: transparent;
+          }
+          #list1 .form-control:focus {
+            border-color: transparent;
+            box-shadow: none;
+          }
+          #list1 .select-input.form-control[readonly]:not([disabled]) {
+            background-color: #fbfbfb;
+          }
+          #datetimeenter{
+            font-size: xx-large;
+            width: 40px;
+            margin: 10px;
+            border: 0;
+          }
+          #search{
+            width: 120px;
+            margin-right: 20px;
+            /* background-color: rgb(235, 235, 235); */
+            border-radius: 4px;
+          }
+          #alertbox {
+            text-align: center;
+            width: 350px;
+            height: 400px;
+            padding: 20px;
+            background: linear-gradient(rgb(45, 210, 132) 40%, white 40%) no-repeat;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 6px;
+            border: 0;
+            color: white;
+            margin: auto;
+          }
+          #overlay {
+            padding: 300px;
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2;
+            cursor: pointer;
+          }
+    </style>
+</head>
+<body>
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+              <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+                <div class="card-body py-4 px-4 px-md-5">
+      
+                  <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
+                    <i class="fas fa-check-square me-1"></i>
+                    <u>My Todo-s</u>
+                  </p>
+      
+                  <div class="pb-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex flex-row align-items-center">
+                          <input id="task" type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
+                            placeholder="Add new...">
+                            <select name="task" id="type">
+                              <option value="" disabled selected>Type</option>
+                              <option value="task">task</option>
+                              <option value="event">event</option>
+                              <option value="meeting">meeting</option>
+                              <option value="break">break</option>
+                          </select>
+                            <input id="datetimeenter" type="datetime-local">
+                          <div>
+                            <button type="button" class="btn btn-primary" onclick="createTask()">Add</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <hr class="my-4">
+      
+                  <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
+                    <p class="small mb-0 me-2 text-muted">Search</p>
+                    <input type="text" id="search">
+                    <p class="small mb-0 me-2 text-muted">Filter</p>
+                    <select class="select" onmousedown="this.value='';" onchange="jsFunction(this.value);">
+                      <option value="1">All</option>
+                      <option value="2">Completed</option>
+                      <option value="3">Active</option>
+                      <option value="4">Has due date</option>
+                    </select>
+                    <p class="small mb-0 ms-4 me-2 text-muted">Sort</p>
+                    <select class="select" onmousedown="this.value='';" onchange="sort(this.value);">
+                      <option value="1">Date</option>
+                      <option value="2">Name</option>
+                    </select>
+                    <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending"><i
+                        class="fas fa-sort-amount-down-alt ms-2"></i></a>
+                  </div>
+
+                  <div id="display_list">
+                    
+                </div>
+                  <!-- <ul class="list-group list-group-horizontal rounded-0">
+                    <li
+                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="form-check">
+                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked2"
+                          aria-label="..." />
+                      </div>
+                    </li>
+                    <li
+                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                      <p class="lead fw-normal mb-0">Renew car insurance</p>
+                    </li>
+                    <li class="list-group-item px-3 py-1 d-flex align-items-center border-0 bg-transparent">
+                      <div
+                        class="py-2 px-3 me-2 border border-warning rounded-3 d-flex align-items-center bg-light">
+                        <p class="small mb-0">
+                          <a href="#!" data-mdb-toggle="tooltip" title="Due on date">
+                            <i class="fas fa-hourglass-half me-2 text-warning"></i>
+                          </a>
+                          28th Jun 2020
+                        </p>
+                      </div>
+                    </li>
+                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="d-flex flex-row justify-content-end mb-1">
+                        <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                            class="fas fa-pencil-alt me-3"></i></a>
+                        <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
+                            class="fas fa-trash-alt"></i></a>
+                      </div>
+                      <div class="text-end text-muted">
+                        <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                          <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="list-group list-group-horizontal rounded-0 mb-2">
+                    <li
+                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="form-check">
+                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked3"
+                          aria-label="..." />
+                      </div>
+                    </li>
+                    <li
+                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                      <p class="lead fw-normal mb-0 bg-light w-100 ms-n2 ps-2 py-1 rounded">Sign up for online
+                        course</p>
+                    </li>
+                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="d-flex flex-row justify-content-end mb-1">
+                        <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
+                            class="fas fa-trash-alt"></i></a>
+                      </div>
+                      <div class="text-end text-muted">
+                        <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                          <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                        </a>
+                      </div>
+                    </li>
+                  </ul> -->
+      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <div id="overlay">
+          <div id="alertbox">
+          <div id="timechange"></div></div>
+    </div>
+    <audio id="myAudio" style="display: none;">
+      <source src="audio.wav" type="audio/mpeg">
+  </audio>
+    <script>
+        let tasks = [];
+        if (localStorage.getItem("local")){
+          tasks=JSON.parse(localStorage.getItem("local"))
+          show()
+        }
+        function append(data,key){
+                let div_new = document.createElement("display_list");
+                div_new.innerHTML=`<ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                    <li
+                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="form-check">
+                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
+                          aria-label="..." />
+                      </div>
+                    </li>
+                    <li
+                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                      <p class="lead fw-normal mb-0">${data.Task}</p>
+                    </li>
+                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="d-flex flex-row justify-content-end mb-1">
+                        <a href="#!" onclick="edit(${key})" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                            class="fas fa-pencil-alt me-3"></i></a>
+                        <a href="#!" onclick="del(${key})" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
+                            class="fas fa-trash-alt"></i></a>
+                      </div>
+                      <div class="text-end text-muted">
+                        <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                          <p class="small mb-0">${data.Time} <i class="fas fa-info-circle me-2"></i>${data.Date}</p>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>`;
+                document.getElementById("display_list").appendChild(div_new);
+              }
+        function createTask(){
+          let tempdatetime = document.getElementById("datetimeenter").value.split("T");
+          let datetime = document.getElementById("datetimeenter").value;
+          let date = tempdatetime[0]
+          let time = tempdatetime[1]
+          tasks.push({
+            Task:document.getElementById("task").value,
+            Time:time,
+            Date:date,
+            DateTime:datetime,
+          })
+            show()
+          }
+            function show(){
+            localStorage.setItem("local",JSON.stringify(tasks))
+            document.getElementById("display_list").innerHTML=null;
+            tasks.map((data,key)=>{
+              append(data,key);
+            })
+        }
+
+        function del(k){
+          let temp = [];
+          tasks.map((data,key)=>{
+            if (key!=k){
+              temp.push(data);
+            }
+            tasks=temp;
+            show()
+          })
+        }
+
+        function edit(k){
+          let temp = [];
+          document.getElementById("display_list").innerHTML=null;
+          tasks.map((data,key)=>{
+            if (key!=k){
+              temp.push(data);
+              append(data,key);
+            }
+            else{
+              let div_new = document.createElement("display_list");
+                div_new.innerHTML=`<ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                    <li
+                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="form-check">
+                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
+                          aria-label="..." />
+                      </div>
+                    </li>
+                    <li
+                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                      <p class="lead fw-normal mb-0"><input type="text" id="task_new" value="${data.Task}"></p>
+                    </li>
+                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                      <div class="d-flex flex-row justify-content-end mb-1">
+                        <a href="#!" onclick="save(${key})" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                            class="fas fa-pencil-alt me-3"></i></a>
+                        <!-- <a href="#!" onclick="del(${key})" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
+                            class="fas fa-trash-alt"></i></a> -->
+                      </div>
+                      <div class="text-end text-muted">
+                        <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                          <p class="small mb-0"><input type="text" id="time_new" value="${data.Time}"> <i class="fas fa-info-circle me-2"></i><input type="text" id="date_new" value="${data.Date}"></p>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>`;
+                document.getElementById("display_list").appendChild(div_new);
+                temp.push(data);
+            }
+            tasks=temp;
+          })
+        }
+        function save(k){
+          tasks[k].Task = document.getElementById("task_new").value;
+          tasks[k].Date = document.getElementById("date_new").value;
+          tasks[k].Time = document.getElementById("time_new").value;
+          tasks[k].DateTime = tasks[k].Date+'T'+tasks[k].Time;
+          show()
+        }
+
+        function sort(value)
+        {
+          // let bydate = tasks.sort((a,b) => new Date(a.Date)-new Date(b.Date));
+          if (value==1){
+            let bydate = tasks.sort((a,b) =>{
+              let date_a = `${a.Date}${a.Time}`;
+              let date_b = `${b.Date}${b.Time}`;
+              return date_a.localeCompare(date_b)
+            })
+            tasks=bydate;
+        }
+        if (value==2){
+          let sortname = tasks.sort((a, b) => a.Task.localeCompare(b.Task));
+          tasks = sortname;
+        }
+          show();
+        }
+        /// Search  ///
+        let inputsearch = document.getElementById("search");
+        let row = document.getElementById("map1");
+
+        inputsearch.addEventListener("input", function () {
+            searchtext = inputsearch.value.toLowerCase();
+            document.getElementById("display_list").innerHTML=null;
+            tasks.map((data, key) => {
+                obtainvalue = data.Task.toLowerCase();
+                if (obtainvalue.includes(searchtext)) {
+                  console.log(obtainvalue);
+                  append(data,key);
+                }
+            });
+        });
+
+
+        /// TO SHOW THE POP UP AFTER TIME AND DATE OF TASK MATCH WITH CURRENT TIME AND DATE ///
+        let popupinterval;
+        let completedtask=[];
+        let isPopupVisible = false;
+        //audio
+        function playaudio() {
+          var audio = document.getElementById("myAudio");
+          audio.play();
+        }
+          
+        function stopaudio() {
+          var audio = document.getElementById("myAudio");
+          audio.pause();
+       }        
+
+        //check arr and call the popup function
+        if (tasks.length >= 1) {
+            popup();
+        }
+
+        function popup() {
+            popupinterval = setInterval(popsetinterval, 1000);
+        }
+
+        function popsetinterval() {
+            if (isPopupVisible) {
+                return; // skip if popup is already visible
+            }
+            tasks.map((data, key) => {
+                let datetime = data.DateTime;
+                console.log("datetime",datetime)
+                let targetDateTime = Date.parse(datetime);
+                let currentdate = Date.parse(new Date());
+                if (currentdate >= targetDateTime) {
+                    showpopup(data.Task, data.Date, data.Time, key); // it show popup
+                    const taskcompletedbutton = document.getElementById("taskcompleted");
+                    taskcompletedbutton.onclick = function () {
+                        hidepop(key, data); // it hide the pop up and delete a task
+                    };
+                    const taskedit = document.getElementById("taskdelay");
+                    taskedit.onclick = function () {
+                        editpop(data, key); // it will edit task time and date
+                    };
+                }
+            });
+        }
+
+        function showpopup(Task, Date, Time, key) {
+            isPopupVisible = true;
+            document.getElementById("alertbox").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+            let div = document.createElement("div");
+            div.innerHTML = `<h2>Alert</h2>
+            <p>Task: ${Task.charAt(0).toUpperCase() + Task.slice(1)}</p>
+            <div id="datetime">
+                <span>Task Time: ${Time}</span>
+                <span>Task Date: ${Date}</span>
+            </div>
+            <input type="button"  value="Task completed"  id="taskcompleted" class="btn">
+            <input type="button" value ="Task delay"  id="taskdelay" class="btn" >
+            `;
+            document.getElementById("alertbox").innerHTML = null;
+            document.getElementById("alertbox").appendChild(div);
+            playaudio();
+        }
+
+        function hidepop(key, data) {
+            stopaudio();
+            isPopupVisible = false;
+            document.getElementById("alertbox").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+            completedtask.push(data.Date);
+            localStorage.setItem("completetask", JSON.stringify(completedtask));
+            del(key);
+        }
+
+        function editpop(data, key) {
+            stopaudio();
+            document.getElementById("alertbox").style.display = "none";
+
+            clearInterval(popupinterval); // stop the interval
+            let div1 = document.createElement("div");
+            div1.innerHTML = `<h3>Task Delay</h3>
+                <div id="datetime2">
+                <span>Date:<input type="datetime-local"  id="date2${key}" value="${data.DateTime}"></input></span>
+                <div>
+                <input type="button"   id="submit" class="btn btn-new" value="submit" >
+                `;
+            document.getElementById("alertbox").innerHTML = null;
+            document.getElementById("alertbox").appendChild(div1);
+            document.getElementById("alertbox").style.display = "block";
+
+            const submitButton = document.getElementById("submit");
+            submitButton.addEventListener("click", function () {
+                edittime(key);
+                isPopupVisible = false;
+                document.getElementById("alertbox").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+                popupinterval = setInterval(popsetinterval, 1000); //it start the setinterval
+            });
+            function edittime(key) {
+                tasks[key].DateTime = document.getElementById("date2" + key).value;
+                let tempdatetime = tasks[key].DateTime.split('T');
+                tasks[key].Date = tempdatetime[0]
+                tasks[key].Time = tempdatetime[1]
+                show();
+            }
+        }
+    </script>
+</body>
+</html>
