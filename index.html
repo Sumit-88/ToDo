@@ -24,18 +24,21 @@
             margin: 10px;
             border: 0;
           }
-          #search{
+          #search,#type{
             width: 120px;
             margin-right: 20px;
-            /* background-color: rgb(235, 235, 235); */
             border-radius: 4px;
+            border: 0;
+          }
+          .select{
+            border: 0;
           }
           #alertbox {
             text-align: center;
-            width: 350px;
-            height: 400px;
+            width: 320px;
+            height: 300px;
             padding: 20px;
-            background: linear-gradient(rgb(45, 210, 132) 40%, white 40%) no-repeat;
+            background: linear-gradient(rgb(45, 210, 132) 60%, white 40%) no-repeat;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
             border-radius: 6px;
             border: 0;
@@ -56,6 +59,259 @@
             z-index: 2;
             cursor: pointer;
           }
+          .checkbox-wrapper-11 {
+            --text: #414856;
+            --check: #4F29F0;
+            --disabled: #C3C8DE;
+            --border-radius: 10px;
+            border-radius: var(--border-radius);
+            position: relative;
+            padding: 5px;
+            display: grid;
+            grid-template-columns: 30px auto;
+            align-items: center;
+          }
+          .checkbox-wrapper-11 label {
+            color: var(--text);
+            position: relative;
+            cursor: pointer;
+            display: grid;
+            align-items: center;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            transition: color 0.3s ease;
+          }
+          .checkbox-wrapper-11 label::before,
+          .checkbox-wrapper-11 label::after {
+            content: "";
+            position: absolute;
+          }
+          .checkbox-wrapper-11 label::before {
+            height: 2px;
+            width: 8px;
+            left: -27px;
+            background: var(--check);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+          }
+          .checkbox-wrapper-11 label:after {
+            height: 4px;
+            width: 4px;
+            top: 8px;
+            left: -25px;
+            border-radius: 50%;
+          }
+          .checkbox-wrapper-11 input[type=checkbox] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            position: relative;
+            height: 15px;
+            width: 15px;
+            outline: none;
+            border: 0;
+            margin: 0 15px 0 0;
+            cursor: pointer;
+            background: var(--background);
+            display: grid;
+            align-items: center;
+          }
+          .checkbox-wrapper-11 input[type=checkbox]::before, .checkbox-wrapper-11 input[type=checkbox]::after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            top: auto;
+            background: var(--check);
+            border-radius: 2px;
+          }
+          .checkbox-wrapper-11 input[type=checkbox]::before {
+            width: 0px;
+            right: 60%;
+            transform-origin: right bottom;
+          }
+          .checkbox-wrapper-11 input[type=checkbox]::after {
+            width: 0px;
+            left: 40%;
+            transform-origin: left bottom;
+          }
+          .checkbox-wrapper-11 input[type=checkbox]:checked::before {
+            -webkit-animation: check-01-11 0.4s ease forwards;
+                    animation: check-01-11 0.4s ease forwards;
+          }
+          .checkbox-wrapper-11 input[type=checkbox]:checked::after {
+            -webkit-animation: check-02-11 0.4s ease forwards;
+                    animation: check-02-11 0.4s ease forwards;
+          }
+          .checkbox-wrapper-11 input[type=checkbox]:checked + label {
+            color: var(--disabled);
+            -webkit-animation: move-11 0.3s ease 0.1s forwards;
+                    animation: move-11 0.3s ease 0.1s forwards;
+          }
+          .checkbox-wrapper-11 input[type=checkbox]:checked + label::before {
+            background: var(--disabled);
+            -webkit-animation: slice-11 0.4s ease forwards;
+                    animation: slice-11 0.4s ease forwards;
+          }
+          .checkbox-wrapper-11 input[type=checkbox]:checked + label::after {
+            -webkit-animation: firework-11 0.5s ease forwards 0.1s;
+                    animation: firework-11 0.5s ease forwards 0.1s;
+          }
+        
+          @-webkit-keyframes move-11 {
+            50% {
+              padding-left: 8px;
+              padding-right: 0px;
+            }
+            100% {
+              padding-right: 4px;
+            }
+          }
+        
+          @keyframes move-11 {
+            50% {
+              padding-left: 8px;
+              padding-right: 0px;
+            }
+            100% {
+              padding-right: 4px;
+            }
+          }
+          @-webkit-keyframes slice-11 {
+            60% {
+              width: 100%;
+              left: 4px;
+            }
+            100% {
+              width: 100%;
+              left: -2px;
+              padding-left: 0;
+            }
+          }
+          @keyframes slice-11 {
+            60% {
+              width: 100%;
+              left: 4px;
+            }
+            100% {
+              width: 100%;
+              left: -2px;
+              padding-left: 0;
+            }
+          }
+          @-webkit-keyframes check-01-11 {
+            0% {
+              width: 4px;
+              top: auto;
+              transform: rotate(0);
+            }
+            50% {
+              width: 0px;
+              top: auto;
+              transform: rotate(0);
+            }
+            51% {
+              width: 0px;
+              top: 8px;
+              transform: rotate(45deg);
+            }
+            100% {
+              width: 5px;
+              top: 8px;
+              transform: rotate(45deg);
+            }
+          }
+          @keyframes check-01-11 {
+            0% {
+              width: 4px;
+              top: auto;
+              transform: rotate(0);
+            }
+            50% {
+              width: 0px;
+              top: auto;
+              transform: rotate(0);
+            }
+            51% {
+              width: 0px;
+              top: 8px;
+              transform: rotate(45deg);
+            }
+            100% {
+              width: 5px;
+              top: 8px;
+              transform: rotate(45deg);
+            }
+          }
+          @-webkit-keyframes check-02-11 {
+            0% {
+              width: 4px;
+              top: auto;
+              transform: rotate(0);
+            }
+            50% {
+              width: 0px;
+              top: auto;
+              transform: rotate(0);
+            }
+            51% {
+              width: 0px;
+              top: 8px;
+              transform: rotate(-45deg);
+            }
+            100% {
+              width: 10px;
+              top: 8px;
+              transform: rotate(-45deg);
+            }
+          }
+          @keyframes check-02-11 {
+            0% {
+              width: 4px;
+              top: auto;
+              transform: rotate(0);
+            }
+            50% {
+              width: 0px;
+              top: auto;
+              transform: rotate(0);
+            }
+            51% {
+              width: 0px;
+              top: 8px;
+              transform: rotate(-45deg);
+            }
+            100% {
+              width: 10px;
+              top: 8px;
+              transform: rotate(-45deg);
+            }
+          }
+          @-webkit-keyframes firework-11 {
+            0% {
+              opacity: 1;
+              box-shadow: 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0;
+            }
+            30% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+              box-shadow: 0 -15px 0 0px #4F29F0, 14px -8px 0 0px #4F29F0, 14px 8px 0 0px #4F29F0, 0 15px 0 0px #4F29F0, -14px 8px 0 0px #4F29F0, -14px -8px 0 0px #4F29F0;
+            }
+          }
+          @keyframes firework-11 {
+            0% {
+              opacity: 1;
+              box-shadow: 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0, 0 0 0 -2px #4F29F0;
+            }
+            30% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+              box-shadow: 0 -15px 0 0px #4F29F0, 14px -8px 0 0px #4F29F0, 14px 8px 0 0px #4F29F0, 0 15px 0 0px #4F29F0, -14px 8px 0 0px #4F29F0, -14px -8px 0 0px #4F29F0;
+            }
+          }
     </style>
 </head>
 <body>
@@ -65,12 +321,10 @@
             <div class="col">
               <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
                 <div class="card-body py-4 px-4 px-md-5">
-      
                   <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
                     <i class="fas fa-check-square me-1"></i>
                     <u>My Todo-s</u>
                   </p>
-      
                   <div class="pb-2">
                     <div class="card">
                       <div class="card-body">
@@ -94,19 +348,20 @@
                   </div>
       
                   <hr class="my-4">
-      
                   <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
                     <p class="small mb-0 me-2 text-muted">Search</p>
                     <input type="text" id="search">
                     <p class="small mb-0 me-2 text-muted">Filter</p>
-                    <select class="select" onmousedown="this.value='';" onchange="jsFunction(this.value);">
-                      <option value="1">All</option>
-                      <option value="2">Completed</option>
-                      <option value="3">Active</option>
-                      <option value="4">Has due date</option>
+                    <select class="select" onmousedown="this.value='';" onchange="filterfunction(this.value);">
+                      <option value="" selected hidden></option>
+                      <option value="task">Task</option>
+                      <option value="event">Event</option>
+                      <option value="meeting">Meeting</option>
+                      <option value="break">Break</option>
                     </select>
                     <p class="small mb-0 ms-4 me-2 text-muted">Sort</p>
                     <select class="select" onmousedown="this.value='';" onchange="sort(this.value);">
+                      <option value="" selected hidden></option>
                       <option value="1">Date</option>
                       <option value="2">Name</option>
                     </select>
@@ -117,69 +372,6 @@
                   <div id="display_list">
                     
                 </div>
-                  <!-- <ul class="list-group list-group-horizontal rounded-0">
-                    <li
-                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
-                      <div class="form-check">
-                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked2"
-                          aria-label="..." />
-                      </div>
-                    </li>
-                    <li
-                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                      <p class="lead fw-normal mb-0">Renew car insurance</p>
-                    </li>
-                    <li class="list-group-item px-3 py-1 d-flex align-items-center border-0 bg-transparent">
-                      <div
-                        class="py-2 px-3 me-2 border border-warning rounded-3 d-flex align-items-center bg-light">
-                        <p class="small mb-0">
-                          <a href="#!" data-mdb-toggle="tooltip" title="Due on date">
-                            <i class="fas fa-hourglass-half me-2 text-warning"></i>
-                          </a>
-                          28th Jun 2020
-                        </p>
-                      </div>
-                    </li>
-                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
-                      <div class="d-flex flex-row justify-content-end mb-1">
-                        <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
-                            class="fas fa-pencil-alt me-3"></i></a>
-                        <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
-                            class="fas fa-trash-alt"></i></a>
-                      </div>
-                      <div class="text-end text-muted">
-                        <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
-                          <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                  <ul class="list-group list-group-horizontal rounded-0 mb-2">
-                    <li
-                      class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
-                      <div class="form-check">
-                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked3"
-                          aria-label="..." />
-                      </div>
-                    </li>
-                    <li
-                      class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                      <p class="lead fw-normal mb-0 bg-light w-100 ms-n2 ps-2 py-1 rounded">Sign up for online
-                        course</p>
-                    </li>
-                    <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
-                      <div class="d-flex flex-row justify-content-end mb-1">
-                        <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
-                            class="fas fa-trash-alt"></i></a>
-                      </div>
-                      <div class="text-end text-muted">
-                        <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
-                          <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
-                        </a>
-                      </div>
-                    </li>
-                  </ul> -->
-      
                 </div>
               </div>
             </div>
@@ -190,7 +382,7 @@
           <div id="alertbox">
           <div id="timechange"></div></div>
     </div>
-    <audio id="myAudio" style="display: none;">
+    <audio controls id="myAudio" style="display: none;">
       <source src="audio.wav" type="audio/mpeg">
   </audio>
     <script>
@@ -201,17 +393,32 @@
         }
         function append(data,key){
                 let div_new = document.createElement("display_list");
+                let t = data.Time.split(":")
+                let d = data.Date.split("-")
                 div_new.innerHTML=`<ul class="list-group list-group-horizontal rounded-0 bg-transparent">
                     <li
                       class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                       <div class="form-check">
-                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
-                          aria-label="..." />
+                        <div class="checkbox-wrapper-11">
+                          <input id="02-11" type="checkbox" name="r" value="2">
+                          <label for="02-11">To-do</label>
+                        </div>
                       </div>
                     </li>
                     <li
                       class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
                       <p class="lead fw-normal mb-0">${data.Task}</p>
+                    </li>
+                    <li class="list-group-item px-3 py-1 d-flex align-items-center border-0 bg-transparent">
+                      <div
+                        class="py-2 px-3 me-2 border border-${data.Type === 'task' ? 'primary' : data.Type === 'event' ? 'success': data.Type === 'meeting' ? 'danger':'warning'} rounded-3 d-flex align-items-center bg-light">
+                        <p class="small mb-0">
+                          <a href="#!" data-mdb-toggle="tooltip" title="Due on date">
+                            <i class="fas fa-hourglass-half me-2 text-${data.Type === 'task' ? 'primary' : data.Type === 'event' ? 'success': data.Type === 'meeting' ? 'danger':'warning'}"></i>
+                          </a>
+                          ${data.Type}
+                        </p>
+                      </div>
                     </li>
                     <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                       <div class="d-flex flex-row justify-content-end mb-1">
@@ -222,7 +429,7 @@
                       </div>
                       <div class="text-end text-muted">
                         <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
-                          <p class="small mb-0">${data.Time} <i class="fas fa-info-circle me-2"></i>${data.Date}</p>
+                          <p class="small mb-0">${t[0] % 12 + ':' + t[1] +(t[0] < 13 ? ' AM' : ' PM')} <i class="fas fa-info-circle me-2"></i>${d[2]+'-'+d[1]+'-'+d[0]}</p>
                         </a>
                       </div>
                     </li>
@@ -236,6 +443,7 @@
           let time = tempdatetime[1]
           tasks.push({
             Task:document.getElementById("task").value,
+            Type:document.getElementById("type").value,
             Time:time,
             Date:date,
             DateTime:datetime,
@@ -275,8 +483,10 @@
                     <li
                       class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                       <div class="form-check">
-                        <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
-                          aria-label="..." />
+                        <div class="checkbox-wrapper-11">
+                          <input id="02-11" type="checkbox" name="r" value="2">
+                          <label for="02-11">To-do</label>
+                        </div>
                       </div>
                     </li>
                     <li
@@ -292,7 +502,7 @@
                       </div>
                       <div class="text-end text-muted">
                         <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
-                          <p class="small mb-0"><input type="text" id="time_new" value="${data.Time}"> <i class="fas fa-info-circle me-2"></i><input type="text" id="date_new" value="${data.Date}"></p>
+                          <p class="small mb-0"><input type="time" id="time_new" value="${data.Time}"> <i class="fas fa-info-circle me-2"></i><input type="date" id="date_new" value="${data.Date}"></p>
                         </a>
                       </div>
                     </li>
@@ -375,7 +585,6 @@
             }
             tasks.map((data, key) => {
                 let datetime = data.DateTime;
-                console.log("datetime",datetime)
                 let targetDateTime = Date.parse(datetime);
                 let currentdate = Date.parse(new Date());
                 if (currentdate >= targetDateTime) {
@@ -403,8 +612,9 @@
                 <span>Task Time: ${Time}</span>
                 <span>Task Date: ${Date}</span>
             </div>
-            <input type="button"  value="Task completed"  id="taskcompleted" class="btn">
-            <input type="button" value ="Task delay"  id="taskdelay" class="btn" >
+            <br><br><br>
+            <input type="button"  value="Task completed"  id="taskcompleted" class="btn btn-primary">
+            <input type="button" value ="Task delay"  id="taskdelay" class="btn btn-primary" >
             `;
             document.getElementById("alertbox").innerHTML = null;
             document.getElementById("alertbox").appendChild(div);
@@ -429,9 +639,10 @@
             let div1 = document.createElement("div");
             div1.innerHTML = `<h3>Task Delay</h3>
                 <div id="datetime2">
+                  <br><br>
                 <span>Date:<input type="datetime-local"  id="date2${key}" value="${data.DateTime}"></input></span>
-                <div>
-                <input type="button"   id="submit" class="btn btn-new" value="submit" >
+                <div><br><br><br>
+                <input type="button"   id="submit" class="btn btn-primary" value="submit" >
                 `;
             document.getElementById("alertbox").innerHTML = null;
             document.getElementById("alertbox").appendChild(div1);
@@ -452,6 +663,16 @@
                 tasks[key].Time = tempdatetime[1]
                 show();
             }
+        }
+        //for filtering of tasks by tasktype
+        function filterfunction(value) {
+          document.getElementById("display_list").innerHTML = null;
+          tasks.map((data, key) => {
+              obtainvalue = data.Type;
+              if (obtainvalue.includes(value)) {
+                append(data,key);
+              }
+          });
         }
     </script>
 </body>
