@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>task</title>
     <style>
-        #list1 .form-control {
+          *:focus {
+            outline: none;
+          }
+          #list1 .form-control {
             border-color: transparent;
           }
           #list1 .form-control:focus {
@@ -493,6 +496,21 @@
                       class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
                       <p class="lead fw-normal mb-0"><input type="text" id="task_new" value="${data.Task}"></p>
                     </li>
+                    <div
+                        class="py-2 px-3 me-2 border border-secondary rounded-3 d-flex align-items-center bg-light">
+                        <p class="small mb-0">
+                          <a href="#!" data-mdb-toggle="tooltip" title="Due on date">
+                            <i class="fas fa-hourglass-half me-2 text-secondary"></i>
+                          </a>
+                          <select id = "type_new" class="select">
+                            <option value="" disabled selected>${data.Type}</option>
+                            <option value="task">Task</option>
+                            <option value="event">Event</option>
+                            <option value="meeting">Meeting</option>
+                            <option value="break">Break</option>
+                          </select>
+                        </p>
+                      </div>
                     <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                       <div class="d-flex flex-row justify-content-end mb-1">
                         <a href="#!" onclick="save(${key})" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
@@ -517,6 +535,7 @@
           tasks[k].Task = document.getElementById("task_new").value;
           tasks[k].Date = document.getElementById("date_new").value;
           tasks[k].Time = document.getElementById("time_new").value;
+          tasks[k].Type = document.getElementById("type_new").value;
           tasks[k].DateTime = tasks[k].Date+'T'+tasks[k].Time;
           show()
         }
